@@ -142,7 +142,7 @@ spec:
           - name: task-log-volume
             mountPath: /taskLogs
           - name: server-log-volume
-            mountPath: /home/octopus/.octopus/OctopusServer/Server/Logs
+            mountPath: /home/octopus/.octopus-server-logs/OctopusServer/Server/Logs
           - name: audit-log-volume
             mountPath: /eventExports
         {{- if .Values.octopus.resources }}
