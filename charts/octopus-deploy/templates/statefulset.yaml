@@ -150,6 +150,8 @@ spec:
             mountPath: /home/octopus/.octopus/OctopusServer/Server/Logs
           - name: audit-log-volume
             mountPath: /eventExports
+          - name: tmp
+            mountPath: /tmp
         {{- if .Values.octopus.resources }}
         resources:
         {{- toYaml .Values.octopus.resources | nindent 10 }}
@@ -195,6 +197,8 @@ spec:
         - name: audit-log-volume
           persistentVolumeClaim:
             claimName: audit-log-claim
+        - name: tmp
+          emptyDir: {}
       {{- if .Values.dockerHub.login }}
       imagePullSecrets:
         - name: dockerhubcreds
