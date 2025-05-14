@@ -54,6 +54,11 @@ spec:
       containers:
       - name: octopus
         image: "{{ .Values.octopus.image.repository }}:{{ default .Chart.AppVersion .Values.octopus.image.tag }}"
+        command:
+        - chown
+        - -R
+        - 999:999
+        - /home/octopus/
         securityContext:
           {{- with .Values.octopus.containerSecurityContext }}
           {{- toYaml . | nindent 10 }}
