@@ -145,7 +145,7 @@ spec:
             mountPath: /home/octopus/.octopus/OctopusServer/Server/Logs
           - name: audit-log-volume
             mountPath: /eventExports
-          {{- with .Values.extraVolumeMounts }}
+          {{- with .Values.octopus.extraVolumeMounts }}
             {{- toYaml . | nindent 10 }}
           {{- end }}
         {{- if .Values.octopus.resources }}
@@ -193,7 +193,7 @@ spec:
         - name: audit-log-volume
           persistentVolumeClaim:
             claimName: audit-log-claim
-        {{- with .Values.extraVolumes }}
+        {{- with .Values.octopus.extraVolumes }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
       {{- if .Values.dockerHub.login }}
