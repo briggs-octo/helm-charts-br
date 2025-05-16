@@ -135,6 +135,8 @@ spec:
           - containerPort: 10943
             name: tentacle
         volumeMounts:
+          - name: tmp
+            mountPath: /tmp
           - name: package-repository-volume
             mountPath: /repository
           - name: artifacts-volume
@@ -181,6 +183,8 @@ spec:
           periodSeconds: 60
       terminationGracePeriodSeconds: 10
       volumes:
+        - name: tmp
+          emptyDir: {}
         - name: package-repository-volume
           persistentVolumeClaim:
             claimName: package-repository-claim
@@ -193,9 +197,6 @@ spec:
         - name: audit-log-volume
           persistentVolumeClaim:
             claimName: audit-log-claim
-        {{- with .Values.octopus.extraVolumes }}
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
       {{- if .Values.dockerHub.login }}
       imagePullSecrets:
         - name: dockerhubcreds
