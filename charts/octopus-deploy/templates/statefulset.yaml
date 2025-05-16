@@ -194,6 +194,9 @@ spec:
             claimName: audit-log-claim
         - name: tmp
           emptyDir: {}
+        {{- with .Values.extraVolumes }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- if .Values.dockerHub.login }}
       imagePullSecrets:
         - name: dockerhubcreds
